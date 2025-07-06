@@ -21,6 +21,10 @@ app.doc('/doc', {
             url: 'http://localhost:8787',
             description: 'Local dev server',
         },
+        {
+            url: 'https://thetire3checklist.tejusraghavendra09.workers.dev',
+            description: 'Production server',
+        },
     ],
 });
 
