@@ -1,54 +1,6 @@
-import { createRoute, OpenAPIHono, z } from "@hono/zod-openapi";
-
-import { deleteUser, getAllUsers, getUserById, loginUser, signupUser, updateUser } from "./user.controller";
-
-// --- Schemas ---
-const UserSchema = z
-    .object({
-        id: z.number(),
-        username: z.string(),
-        name: z.string().optional(),
-        age: z.number().optional(),
-        email: z.string().optional(),
-    })
-    .openapi("User");
-
-const UserArraySchema = z.array(UserSchema).openapi("UserList");
-
-const ParamIdSchema = z.object({
-    id: z.string().regex(/^\d+$/).openapi({ example: "1" }),
-});
-
-const SignupSchema = z
-    .object({
-        username: z.string().min(3),
-        password: z.string().min(6),
-        name: z.string().optional(),
-        age: z.number().optional(),
-        email: z.string().email().optional(),
-    })
-    .openapi("SignupInput");
-
-const LoginSchema = z
-    .object({
-        username: z.string(),
-        password: z.string(),
-    })
-    .openapi("LoginInput");
-
-const AuthResponseSchema = z
-    .object({
-        id: z.number(),
-        username: z.string(),
-        token: z.string(),
-    })
-    .openapi("AuthResponse");
-
-const ErrorSchema = z
-    .object({
-        error: z.string(),
-    })
-    .openapi("ErrorResponse");
+import { createRoute, OpenAPIHono } from "@hono/zod-openapi";
+import { deleteUser, getAllUsers, getUserById, loginUser, signupUser, updateUser } from "../controllers/user.controller";
+import { AuthResponseSchema, ErrorSchema, LoginSchema, ParamIdSchema, SignupSchema, UserArraySchema, UserSchema } from "../schemas/user.schemas";
 
 const openapiUsers = new OpenAPIHono();
 

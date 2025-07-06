@@ -1,9 +1,11 @@
 import { OpenAPIHono } from "@hono/zod-openapi";
 import { Scalar } from "@scalar/hono-api-reference";
-import users from "./users/users.routes";
+import { cors } from "hono/cors";
+import users from "./routes/users.routes";
 
 const app = new OpenAPIHono();
 
+app.use("", cors());
 app.route("/users", users);
 
 app.doc("/doc", {
