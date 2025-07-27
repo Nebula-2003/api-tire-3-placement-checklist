@@ -13,7 +13,7 @@ export const ErrorDetailSchema = z.object({
     message: z.string(),
 });
 
-export const ErrorObjectSchema = z.object({
+export const ErrorSchema = z.object({
     code: z.string(),
     details: z.array(ErrorDetailSchema).optional(),
 });
@@ -23,7 +23,7 @@ export const ApiResponseSchema = z
         success: z.boolean(),
         message: z.string(),
         data: z.any().nullable(),
-        error: ErrorObjectSchema.nullable(),
+        error: ErrorSchema.nullable(),
         meta: MetaSchema.optional(),
         timestamp: z.string().datetime(),
         requestId: z.string(),

@@ -1,0 +1,1 @@
+ALTER TABLE `checklist_items` ADD `order` integer NOT NULL;
